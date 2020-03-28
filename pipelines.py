@@ -123,7 +123,10 @@ class PipelineToDB(PipelineBase):
         if format == 'json':
             data = json.dumps(data, ensure_ascii=False)
         url = f'{self.host}/rput?{urlencode({"db": self.db_name, "format": format, "record": data})}'
-        async with session.get(url, verify_ssl=False) as resp:
-            js = await resp.json()
-            resp_code = resp.status
-        return resp_code
+        try:
+            async with session.get(url, verify_ssl=False) as resp:
+                js = await resp.json()
+                resp_code = resp.status
+            return resp_code
+        except Exception:
+            pass
