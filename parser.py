@@ -56,7 +56,8 @@ class HtmlParser:
         for t in self.text:
             if len(t) > len(result):
                 result = t
-        return result
+        return result[:200]
+
 
 if __name__ == '__main__':
     with open('test.html', 'r') as f:

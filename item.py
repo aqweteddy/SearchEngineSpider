@@ -6,13 +6,19 @@ from parser import HtmlParser
 
 
 class PageItem:
-    main_content: str = None
+    body: str = None
     url: str = None
     domain: str = None
     title: str = None
     depth_from_root: int = None
     a: List[str] = None
     ip: str = None
+
+    def __iter__(self):
+        yield 'body', self.body
+        yield 'url', self.url
+        yield 'domain', self.domain
+        yield 'title', self.title
 
 
 class ResponseItem:
@@ -32,7 +38,7 @@ class ResponseItem:
 
         item.title = parser.get_title()
         item.domain = Function.get_domain(item.url)
-        item.main_content = parser.get_main_content()
+        item.body = parser.get_main_content()
         item.a = []
         for href in parser.get_hrefs():
             if not href:

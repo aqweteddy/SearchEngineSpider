@@ -1,14 +1,18 @@
 from typing import List
 import json
-
+from urllib.parse import urlencode
+import aiohttp
+import asyncio
 from item import PageItem, ResponseItem
+import logging
 
 
 # TODO: Drop Item
- 
+
 class PipelineBase:
     def __init__(self):
         """init"""
+        self.logger = logging.getLogger('[Pipeline]')
         # print(type(self).__name__, end=', ')
 
     def open_spider(self):
@@ -19,7 +23,7 @@ class PipelineBase:
 
     def in_resp_queue(self, data):
         """call from resp_queue
-        
+
         Arguments:
             resp {ResponseItem}
         return:
@@ -29,31 +33,61 @@ class PipelineBase:
 
     def in_page_queue(self, data):
         """call from resp_queue
-        
+
         Arguments:
             data {PageItem}
         return:
             {pageItem}
         """
         return data
-    
+    def save(self, data):
+        """save data to db
+        
+        Arguments:
+            data {PageItem} -- data
+        """        
     def close(self):
         pass
 
 
-class PipelineMainContent(PipelineBase):
-    def open_spider(self):
-        self.data = []
-
-    def in_resp_queue(self, resp: ResponseItem):
-        self.data.append({'url':resp.url, 'html': resp.html})
-        
-        return resp
-    
-    def close(self):
-        with open('test.json', 'w', encoding='utf-8') as f:
-            json.dump(self.data, f)
-
 class PipelineToDB(PipelineBase):
-    def in_page_queue(self, data: PageItem):
-        return data
+    def __init__(self, host: str = 'http://nudb1.ddns.net:5804/nudb', db_name: str = 'search_engine'):
+        super().__init__()
+        self.host = host
+        self.db_name = db_name
+        self.pool = []
+        self.pushed_cnt = 0
+
+    def save(self, data):
+        self.pool.append(dict(data))
+
+        if len(self.pool) > 1000:
+            self.logger.warning('batch push to DB')
+            loop = asyncio.get_event_loop()
+            loop.run_until_complete(self.batch_rput())
+            self.pushed_cnt += len(self.pool)
+            self.pool.clear()
+            self.logger.warning(f'Numbers of finish Items: {self.pushed_cnt}')
+
+    async def batch_rput(self):
+        async with aiohttp.ClientSession() as session:
+            batch_data = []
+            tasks = []
+            for data in self.pool:
+                batch_data.append(data)
+                if len(batch_data) == 20:
+                    task = asyncio.create_task(self.rput(session, batch_data))
+                    tasks.append(task)
+                    batch_data = []
+            task = asyncio.create_task(self.rput(session, batch_data))
+            tasks.append(task)
+            result = await asyncio.gather(*tasks)
+        
+    async def rput(self, session, data: list, format: str = 'json'):
+        if format == 'json':
+            data = json.dumps(data, ensure_ascii=False)
+        url = f'{self.host}/rput?{urlencode({"db": self.db_name, "format": format, "record": data})}'
+        async with session.get(url, verify_ssl=False) as resp:
+                js = await resp.json()
+                resp_code = resp.status
+        return resp_code
