@@ -1,6 +1,7 @@
+import re
+
 from html5_parser import parse
 from lxml.etree import tostring
-import re
 
 
 class HtmlParser:
