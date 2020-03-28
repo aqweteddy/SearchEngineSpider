@@ -6,8 +6,8 @@ from typing import List
 import aiohttp
 
 from item import PageItem, ResponseItem
-from pipelines import PipelineToDB
-from url_pool import UrlPool
+from pipelines import PipelineToDB, PipelineMainContent
+from utils.url_pool import UrlPool
 
 
 class Spider:
@@ -111,8 +111,13 @@ class Spider:
 
         if resp_item.drop:
             return None
-        page_item = resp_item.convert_to_page()
-
+        
+        for pipeline in pipelines:
+            tmp = pipeline.convert_resp_to_page(resp_item)
+            if tmp:
+                break
+            
+        page_item = tmp
         for pipeline in pipelines:
             page_item = pipeline.in_page_queue(page_item)
 
@@ -147,6 +152,6 @@ class Spider:
 if __name__ == '__main__':
     logging.basicConfig(level=logging.WARNING)
 
-    spider = Spider(pipelines=[PipelineToDB()], allow_domain=['dcard.tw', 'ptt.cc', 'imgur.com'], max_depth=5, max_thread=10)
+    spider = Spider(pipelines=[PipelineToDB(), PipelineMainContent()], allow_domain=['dcard.tw', 'ptt.cc', 'imgur.com'], max_depth=5, max_thread=10)
     spider.start_batch(
         ['https://www.ptt.cc/bbs/Baseball/index.html', 'https://www.dcard.tw/f'])

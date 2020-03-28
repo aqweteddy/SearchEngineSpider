@@ -1,4 +1,4 @@
-from utils import Function
+from utils.function import Function
 
 
 class UrlItem:

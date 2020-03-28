@@ -1,14 +1,16 @@
 import asyncio
 import json
 import logging
+from utils.parser import HtmlParser
 from typing import List
-from urllib.parse import urlencode
+from urllib.parse import urlencode, urljoin
 
 import aiohttp
 
 from item import PageItem, ResponseItem
-
+from utils.function import Function
 # TODO: Drop Item
+
 
 class PipelineBase:
     def __init__(self):
@@ -32,6 +34,14 @@ class PipelineBase:
         """
         return data
 
+    def convert_resp_to_page(self, resp):
+        """convert resp_item to page_item
+
+        Arguments:
+            resp {RespItem} -- responseItem
+        """
+        return None
+
     def in_page_queue(self, data):
         """call from resp_queue
 
@@ -41,14 +51,39 @@ class PipelineBase:
             {pageItem}
         """
         return data
+
     def save(self, data):
         """save data to db
-        
+
         Arguments:
             data {PageItem} -- data
-        """        
+        """
+
     def close(self):
         pass
+
+
+class PipelineMainContent(PipelineBase):
+    def __init__(self):
+        super().__init__()
+
+    def convert_resp_to_page(self, resp):
+        item = PageItem()
+
+        item.url = resp.url
+        item.depth_from_root = resp.depth_from_root
+
+        parser = HtmlParser(resp.html)
+
+        item.title = parser.get_title()
+        item.domain = Function.get_domain(item.url)
+        item.body = parser.get_main_content()
+        item.a = []
+        for href in parser.get_hrefs():
+            if not href:
+                continue
+            item.a.append(urljoin(item.url, href))
+        return item
 
 
 class PipelineToDB(PipelineBase):
@@ -83,12 +118,12 @@ class PipelineToDB(PipelineBase):
             task = asyncio.create_task(self.rput(session, batch_data))
             tasks.append(task)
             result = await asyncio.gather(*tasks)
-        
+
     async def rput(self, session, data: list, format: str = 'json'):
         if format == 'json':
             data = json.dumps(data, ensure_ascii=False)
         url = f'{self.host}/rput?{urlencode({"db": self.db_name, "format": format, "record": data})}'
         async with session.get(url, verify_ssl=False) as resp:
-                js = await resp.json()
-                resp_code = resp.status
+            js = await resp.json()
+            resp_code = resp.status
         return resp_code

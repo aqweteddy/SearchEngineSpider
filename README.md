@@ -1,6 +1,19 @@
 # SearchEngineSpider
 
-## Architechture
+## Architecture
+
+* engine: main spider
+* item: define Item to store data
+* pipelines: change item 
+* utils
+  * parser: html5parser to get urls, main_content, ....
+  * url_pool: url queue
+  * function: simple operation
+
+### engine
+
+* 使用 aiohttp 做異步爬蟲
+* 
 
 ## Experiment
 
