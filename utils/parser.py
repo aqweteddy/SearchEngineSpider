@@ -40,10 +40,13 @@ class HtmlParser:
     def __extract_all_children(self, now):
         tmp = ''
         for node in now:
-            tmp += node.text if node.text else '' + node.tail if node.tail else ''
-            tmp += self.__extract_all_children(node)
             if node.tag == 'a':
                 self.urls.append(node.get('href'))
+            tmp += node.text if node.text else '' + node.tail if node.tail else ''
+            try:
+                tmp += self.__extract_all_children(node)
+            except RecursionError:
+                return tmp
         return tmp
 
     def get_hrefs(self):

@@ -9,7 +9,7 @@ class UrlItem:
 
     def __hash__(self):
         return hash(self.url)
-    
+
     def __eq__(self, b):
         return self.url == b.url
 
@@ -19,7 +19,7 @@ class UrlItem:
 
 
 class UrlPool:
-    def __init__(self, max_depth: int=2):
+    def __init__(self, max_depth: int = 2):
         self.url_db = dict()  # {domain: set((url, depth), ....)}
         self.prev_db = dict()
         self.cnt_url = 0
@@ -36,7 +36,7 @@ class UrlPool:
         """
         if depth > self.max_depth:
             return
-        
+
         domain = Function.get_domain(url)
         try:
             self.url_db[domain].add(UrlItem(url, depth))
@@ -46,10 +46,10 @@ class UrlPool:
             self.cnt_url += 1
         except Exception:
             pass
-    
+
     def __len__(self):
         return self.cnt_url
-    
+
     def get_batch(self, k: int):
         """[get k url pairs]
 
@@ -68,9 +68,6 @@ class UrlPool:
                 break
         self.cnt_url = self.cnt_url - k if self.cnt_url > k else 0
         return result
-
-
-
 
 
 if __name__ == '__main__':

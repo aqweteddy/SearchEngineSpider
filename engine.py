@@ -7,7 +7,8 @@ import aiohttp
 
 from item import PageItem, ResponseItem
 from pipelines import PipelineToDB, PipelineMainContent
-from utils.url_pool import UrlPool
+# from utils.url_pool import UrlPool
+from cpp_ext.urlPool import PyUrlPool
 
 
 class Spider:
@@ -21,7 +22,7 @@ class Spider:
         self.pipelines = pipelines
         self.logger = logging.getLogger('[Spider]')
 
-        self.url_que = UrlPool(max_depth)
+        self.url_que = PyUrlPool(max_depth)
         self.max_thread = max_thread
         self.max_concurrent_request= max_concurrent_request
 
@@ -152,6 +153,6 @@ class Spider:
 if __name__ == '__main__':
     logging.basicConfig(level=logging.WARNING)
 
-    spider = Spider(pipelines=[PipelineToDB(), PipelineMainContent()], allow_domain=['dcard.tw', 'ptt.cc', 'imgur.com'], max_depth=5, max_thread=10)
+    spider = Spider(pipelines=[PipelineToDB(), PipelineMainContent()], allow_domain=['dcard.tw', 'ptt.cc', 'imgur.com'], max_depth=3, max_thread=10)
     spider.start_batch(
         ['https://www.ptt.cc/bbs/Baseball/index.html', 'https://www.dcard.tw/f'])

@@ -16,7 +16,6 @@ class PipelineBase:
     def __init__(self):
         """init"""
         self.logger = logging.getLogger('[Pipeline]')
-        # print(type(self).__name__, end=', ')
 
     def open_spider(self):
         """
