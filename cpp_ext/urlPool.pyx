@@ -18,6 +18,9 @@ cdef class PyUrlPool:
     def __len__(self):
         return self.url_pool.size()
 
+    def pq_size(self):
+        return self.url_pool.pq_size()
+
     def get(self):
         cdef string url
         cdef int depth

@@ -1,6 +1,6 @@
 from typing import List
 
-from utils.function import Function
+from utils.function import get_domain
 
 
 class PageItem:
@@ -34,4 +34,4 @@ class ResponseItem:
 
 
 if __name__ == '__main__':
-    print(Function.get_domain('https://google.com/'))
+    print(get_domain('https://google.com/'))

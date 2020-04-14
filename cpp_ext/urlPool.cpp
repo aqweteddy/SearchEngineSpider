@@ -1327,14 +1327,15 @@ static PyObject *__pyx_n_s_url_r;
 static int __pyx_pf_7urlPool_9PyUrlPool___cinit__(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self, int __pyx_v_max_depth, int __pyx_v_url_r, int __pyx_v_url_c, int __pyx_v_url_p, int __pyx_v_dom_r, CYTHON_UNUSED int __pyx_v_dom_c, CYTHON_UNUSED int __pyx_v_dom_p); /* proto */
 static PyObject *__pyx_pf_7urlPool_9PyUrlPool_2add(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self, PyObject *__pyx_v_url, PyObject *__pyx_v_depth); /* proto */
 static Py_ssize_t __pyx_pf_7urlPool_9PyUrlPool_4__len__(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_7urlPool_9PyUrlPool_6get(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_7urlPool_9PyUrlPool_8get_batch(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self, PyObject *__pyx_v_k); /* proto */
-static PyObject *__pyx_pf_7urlPool_9PyUrlPool_10get_domain(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self, PyObject *__pyx_v_url); /* proto */
-static PyObject *__pyx_pf_7urlPool_9PyUrlPool_12query_url(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self, PyObject *__pyx_v_url); /* proto */
-static PyObject *__pyx_pf_7urlPool_9PyUrlPool_14query_domain(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self, PyObject *__pyx_v_dom); /* proto */
-static void __pyx_pf_7urlPool_9PyUrlPool_16__dealloc__(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_7urlPool_9PyUrlPool_18__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_7urlPool_9PyUrlPool_20__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_7urlPool_9PyUrlPool_6pq_size(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_7urlPool_9PyUrlPool_8get(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_7urlPool_9PyUrlPool_10get_batch(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self, PyObject *__pyx_v_k); /* proto */
+static PyObject *__pyx_pf_7urlPool_9PyUrlPool_12get_domain(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self, PyObject *__pyx_v_url); /* proto */
+static PyObject *__pyx_pf_7urlPool_9PyUrlPool_14query_url(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self, PyObject *__pyx_v_url); /* proto */
+static PyObject *__pyx_pf_7urlPool_9PyUrlPool_16query_domain(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self, PyObject *__pyx_v_dom); /* proto */
+static void __pyx_pf_7urlPool_9PyUrlPool_18__dealloc__(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_7urlPool_9PyUrlPool_20__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_7urlPool_9PyUrlPool_22__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_tp_new_7urlPool_PyUrlPool(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
@@ -1711,7 +1712,7 @@ static Py_ssize_t __pyx_pf_7urlPool_9PyUrlPool_4__len__(struct __pyx_obj_7urlPoo
  *     def __len__(self):
  *         return self.url_pool.size()             # <<<<<<<<<<<<<<
  * 
- *     def get(self):
+ *     def pq_size(self):
  */
   __pyx_r = __pyx_v_self->url_pool->size();
   goto __pyx_L0;
@@ -1733,25 +1734,85 @@ static Py_ssize_t __pyx_pf_7urlPool_9PyUrlPool_4__len__(struct __pyx_obj_7urlPoo
 /* "urlPool.pyx":21
  *         return self.url_pool.size()
  * 
- *     def get(self):             # <<<<<<<<<<<<<<
- *         cdef string url
- *         cdef int depth
+ *     def pq_size(self):             # <<<<<<<<<<<<<<
+ *         return self.url_pool.pq_size()
+ * 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7urlPool_9PyUrlPool_7get(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_7urlPool_9PyUrlPool_7get(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_7urlPool_9PyUrlPool_7pq_size(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_7urlPool_9PyUrlPool_7pq_size(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("get (wrapper)", 0);
-  __pyx_r = __pyx_pf_7urlPool_9PyUrlPool_6get(((struct __pyx_obj_7urlPool_PyUrlPool *)__pyx_v_self));
+  __Pyx_RefNannySetupContext("pq_size (wrapper)", 0);
+  __pyx_r = __pyx_pf_7urlPool_9PyUrlPool_6pq_size(((struct __pyx_obj_7urlPool_PyUrlPool *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7urlPool_9PyUrlPool_6get(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self) {
+static PyObject *__pyx_pf_7urlPool_9PyUrlPool_6pq_size(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  __Pyx_RefNannySetupContext("pq_size", 0);
+
+  /* "urlPool.pyx":22
+ * 
+ *     def pq_size(self):
+ *         return self.url_pool.pq_size()             # <<<<<<<<<<<<<<
+ * 
+ *     def get(self):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->url_pool->pq_size()); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "urlPool.pyx":21
+ *         return self.url_pool.size()
+ * 
+ *     def pq_size(self):             # <<<<<<<<<<<<<<
+ *         return self.url_pool.pq_size()
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("urlPool.PyUrlPool.pq_size", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "urlPool.pyx":24
+ *         return self.url_pool.pq_size()
+ * 
+ *     def get(self):             # <<<<<<<<<<<<<<
+ *         cdef string url
+ *         cdef int depth
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_7urlPool_9PyUrlPool_9get(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_7urlPool_9PyUrlPool_9get(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("get (wrapper)", 0);
+  __pyx_r = __pyx_pf_7urlPool_9PyUrlPool_8get(((struct __pyx_obj_7urlPool_PyUrlPool *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_7urlPool_9PyUrlPool_8get(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self) {
   std::string __pyx_v_url;
   int __pyx_v_depth;
   PyObject *__pyx_r = NULL;
@@ -1761,7 +1822,7 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_6get(struct __pyx_obj_7urlPool_PyU
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("get", 0);
 
-  /* "urlPool.pyx":24
+  /* "urlPool.pyx":27
  *         cdef string url
  *         cdef int depth
  *         self.url_pool.get(&url, &depth)             # <<<<<<<<<<<<<<
@@ -1770,7 +1831,7 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_6get(struct __pyx_obj_7urlPool_PyU
  */
   __pyx_v_self->url_pool->get((&__pyx_v_url), (&__pyx_v_depth));
 
-  /* "urlPool.pyx":25
+  /* "urlPool.pyx":28
  *         cdef int depth
  *         self.url_pool.get(&url, &depth)
  *         return bytes.decode(url), depth             # <<<<<<<<<<<<<<
@@ -1778,11 +1839,11 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_6get(struct __pyx_obj_7urlPool_PyU
  *     def get_batch(self, k):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_decode_cpp_string(__pyx_v_url, 0, PY_SSIZE_T_MAX, NULL, NULL, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_decode_cpp_string(__pyx_v_url, 0, PY_SSIZE_T_MAX, NULL, NULL, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 28, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_depth); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_depth); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 28, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 28, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
@@ -1794,8 +1855,8 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_6get(struct __pyx_obj_7urlPool_PyU
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "urlPool.pyx":21
- *         return self.url_pool.size()
+  /* "urlPool.pyx":24
+ *         return self.url_pool.pq_size()
  * 
  *     def get(self):             # <<<<<<<<<<<<<<
  *         cdef string url
@@ -1815,7 +1876,7 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_6get(struct __pyx_obj_7urlPool_PyU
   return __pyx_r;
 }
 
-/* "urlPool.pyx":27
+/* "urlPool.pyx":30
  *         return bytes.decode(url), depth
  * 
  *     def get_batch(self, k):             # <<<<<<<<<<<<<<
@@ -1824,19 +1885,19 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_6get(struct __pyx_obj_7urlPool_PyU
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7urlPool_9PyUrlPool_9get_batch(PyObject *__pyx_v_self, PyObject *__pyx_v_k); /*proto*/
-static PyObject *__pyx_pw_7urlPool_9PyUrlPool_9get_batch(PyObject *__pyx_v_self, PyObject *__pyx_v_k) {
+static PyObject *__pyx_pw_7urlPool_9PyUrlPool_11get_batch(PyObject *__pyx_v_self, PyObject *__pyx_v_k); /*proto*/
+static PyObject *__pyx_pw_7urlPool_9PyUrlPool_11get_batch(PyObject *__pyx_v_self, PyObject *__pyx_v_k) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_batch (wrapper)", 0);
-  __pyx_r = __pyx_pf_7urlPool_9PyUrlPool_8get_batch(((struct __pyx_obj_7urlPool_PyUrlPool *)__pyx_v_self), ((PyObject *)__pyx_v_k));
+  __pyx_r = __pyx_pf_7urlPool_9PyUrlPool_10get_batch(((struct __pyx_obj_7urlPool_PyUrlPool *)__pyx_v_self), ((PyObject *)__pyx_v_k));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7urlPool_9PyUrlPool_8get_batch(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self, PyObject *__pyx_v_k) {
+static PyObject *__pyx_pf_7urlPool_9PyUrlPool_10get_batch(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self, PyObject *__pyx_v_k) {
   PyObject *__pyx_v_result = NULL;
   CYTHON_UNUSED PyObject *__pyx_v_i = NULL;
   PyObject *__pyx_v_tmp = NULL;
@@ -1853,34 +1914,34 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_8get_batch(struct __pyx_obj_7urlPo
   int __pyx_t_9;
   __Pyx_RefNannySetupContext("get_batch", 0);
 
-  /* "urlPool.pyx":28
+  /* "urlPool.pyx":31
  * 
  *     def get_batch(self, k):
  *         result = []             # <<<<<<<<<<<<<<
  *         for i in range(k):
  *             tmp = self.get()
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 28, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_result = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "urlPool.pyx":29
+  /* "urlPool.pyx":32
  *     def get_batch(self, k):
  *         result = []
  *         for i in range(k):             # <<<<<<<<<<<<<<
  *             tmp = self.get()
  *             if not tmp[0]:
  */
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_range, __pyx_v_k); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_range, __pyx_v_k); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 32, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
     __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2); __pyx_t_3 = 0;
     __pyx_t_4 = NULL;
   } else {
-    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 29, __pyx_L1_error)
+    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 32, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 29, __pyx_L1_error)
+    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 32, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
@@ -1888,17 +1949,17 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_8get_batch(struct __pyx_obj_7urlPo
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_3 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 29, __pyx_L1_error)
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 32, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 32, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       } else {
         if (__pyx_t_3 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 29, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 32, __pyx_L1_error)
         #else
-        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
+        __pyx_t_1 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 32, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       }
@@ -1908,7 +1969,7 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_8get_batch(struct __pyx_obj_7urlPo
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 29, __pyx_L1_error)
+          else __PYX_ERR(0, 32, __pyx_L1_error)
         }
         break;
       }
@@ -1917,14 +1978,14 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_8get_batch(struct __pyx_obj_7urlPo
     __Pyx_XDECREF_SET(__pyx_v_i, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "urlPool.pyx":30
+    /* "urlPool.pyx":33
  *         result = []
  *         for i in range(k):
  *             tmp = self.get()             # <<<<<<<<<<<<<<
  *             if not tmp[0]:
  *                 break
  */
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 30, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 33, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_6 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_5))) {
@@ -1938,27 +1999,27 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_8get_batch(struct __pyx_obj_7urlPo
     }
     __pyx_t_1 = (__pyx_t_6) ? __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6) : __Pyx_PyObject_CallNoArg(__pyx_t_5);
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 30, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 33, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_XDECREF_SET(__pyx_v_tmp, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "urlPool.pyx":31
+    /* "urlPool.pyx":34
  *         for i in range(k):
  *             tmp = self.get()
  *             if not tmp[0]:             # <<<<<<<<<<<<<<
  *                 break
  *             result.append(tmp)
  */
-    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_tmp, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 31, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_tmp, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 31, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 34, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_8 = ((!__pyx_t_7) != 0);
     if (__pyx_t_8) {
 
-      /* "urlPool.pyx":32
+      /* "urlPool.pyx":35
  *             tmp = self.get()
  *             if not tmp[0]:
  *                 break             # <<<<<<<<<<<<<<
@@ -1967,7 +2028,7 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_8get_batch(struct __pyx_obj_7urlPo
  */
       goto __pyx_L4_break;
 
-      /* "urlPool.pyx":31
+      /* "urlPool.pyx":34
  *         for i in range(k):
  *             tmp = self.get()
  *             if not tmp[0]:             # <<<<<<<<<<<<<<
@@ -1976,16 +2037,16 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_8get_batch(struct __pyx_obj_7urlPo
  */
     }
 
-    /* "urlPool.pyx":33
+    /* "urlPool.pyx":36
  *             if not tmp[0]:
  *                 break
  *             result.append(tmp)             # <<<<<<<<<<<<<<
  *         return result
  * 
  */
-    __pyx_t_9 = __Pyx_PyList_Append(__pyx_v_result, __pyx_v_tmp); if (unlikely(__pyx_t_9 == ((int)-1))) __PYX_ERR(0, 33, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyList_Append(__pyx_v_result, __pyx_v_tmp); if (unlikely(__pyx_t_9 == ((int)-1))) __PYX_ERR(0, 36, __pyx_L1_error)
 
-    /* "urlPool.pyx":29
+    /* "urlPool.pyx":32
  *     def get_batch(self, k):
  *         result = []
  *         for i in range(k):             # <<<<<<<<<<<<<<
@@ -1996,7 +2057,7 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_8get_batch(struct __pyx_obj_7urlPo
   __pyx_L4_break:;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "urlPool.pyx":34
+  /* "urlPool.pyx":37
  *                 break
  *             result.append(tmp)
  *         return result             # <<<<<<<<<<<<<<
@@ -2008,7 +2069,7 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_8get_batch(struct __pyx_obj_7urlPo
   __pyx_r = __pyx_v_result;
   goto __pyx_L0;
 
-  /* "urlPool.pyx":27
+  /* "urlPool.pyx":30
  *         return bytes.decode(url), depth
  * 
  *     def get_batch(self, k):             # <<<<<<<<<<<<<<
@@ -2033,7 +2094,7 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_8get_batch(struct __pyx_obj_7urlPo
   return __pyx_r;
 }
 
-/* "urlPool.pyx":36
+/* "urlPool.pyx":39
  *         return result
  * 
  *     def get_domain(self, url):             # <<<<<<<<<<<<<<
@@ -2042,19 +2103,19 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_8get_batch(struct __pyx_obj_7urlPo
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7urlPool_9PyUrlPool_11get_domain(PyObject *__pyx_v_self, PyObject *__pyx_v_url); /*proto*/
-static PyObject *__pyx_pw_7urlPool_9PyUrlPool_11get_domain(PyObject *__pyx_v_self, PyObject *__pyx_v_url) {
+static PyObject *__pyx_pw_7urlPool_9PyUrlPool_13get_domain(PyObject *__pyx_v_self, PyObject *__pyx_v_url); /*proto*/
+static PyObject *__pyx_pw_7urlPool_9PyUrlPool_13get_domain(PyObject *__pyx_v_self, PyObject *__pyx_v_url) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_domain (wrapper)", 0);
-  __pyx_r = __pyx_pf_7urlPool_9PyUrlPool_10get_domain(((struct __pyx_obj_7urlPool_PyUrlPool *)__pyx_v_self), ((PyObject *)__pyx_v_url));
+  __pyx_r = __pyx_pf_7urlPool_9PyUrlPool_12get_domain(((struct __pyx_obj_7urlPool_PyUrlPool *)__pyx_v_self), ((PyObject *)__pyx_v_url));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7urlPool_9PyUrlPool_10get_domain(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self, PyObject *__pyx_v_url) {
+static PyObject *__pyx_pf_7urlPool_9PyUrlPool_12get_domain(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self, PyObject *__pyx_v_url) {
   std::string __pyx_v_c_url;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -2064,14 +2125,14 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_10get_domain(struct __pyx_obj_7url
   std::string __pyx_t_4;
   __Pyx_RefNannySetupContext("get_domain", 0);
 
-  /* "urlPool.pyx":37
+  /* "urlPool.pyx":40
  * 
  *     def get_domain(self, url):
  *         cdef string c_url = str.encode(url)             # <<<<<<<<<<<<<<
  *         return bytes.decode(self.url_pool.get_domain(c_url))
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)(&PyString_Type)), __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)(&PyString_Type)), __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -2085,14 +2146,14 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_10get_domain(struct __pyx_obj_7url
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_url) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_url);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __pyx_convert_string_from_py_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_4 = __pyx_convert_string_from_py_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c_url = __pyx_t_4;
 
-  /* "urlPool.pyx":38
+  /* "urlPool.pyx":41
  *     def get_domain(self, url):
  *         cdef string c_url = str.encode(url)
  *         return bytes.decode(self.url_pool.get_domain(c_url))             # <<<<<<<<<<<<<<
@@ -2100,13 +2161,13 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_10get_domain(struct __pyx_obj_7url
  *     def query_url(self, url):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_decode_cpp_string(__pyx_v_self->url_pool->get_domain(__pyx_v_c_url), 0, PY_SSIZE_T_MAX, NULL, NULL, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_decode_cpp_string(__pyx_v_self->url_pool->get_domain(__pyx_v_c_url), 0, PY_SSIZE_T_MAX, NULL, NULL, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "urlPool.pyx":36
+  /* "urlPool.pyx":39
  *         return result
  * 
  *     def get_domain(self, url):             # <<<<<<<<<<<<<<
@@ -2127,7 +2188,7 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_10get_domain(struct __pyx_obj_7url
   return __pyx_r;
 }
 
-/* "urlPool.pyx":40
+/* "urlPool.pyx":43
  *         return bytes.decode(self.url_pool.get_domain(c_url))
  * 
  *     def query_url(self, url):             # <<<<<<<<<<<<<<
@@ -2136,19 +2197,19 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_10get_domain(struct __pyx_obj_7url
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7urlPool_9PyUrlPool_13query_url(PyObject *__pyx_v_self, PyObject *__pyx_v_url); /*proto*/
-static PyObject *__pyx_pw_7urlPool_9PyUrlPool_13query_url(PyObject *__pyx_v_self, PyObject *__pyx_v_url) {
+static PyObject *__pyx_pw_7urlPool_9PyUrlPool_15query_url(PyObject *__pyx_v_self, PyObject *__pyx_v_url); /*proto*/
+static PyObject *__pyx_pw_7urlPool_9PyUrlPool_15query_url(PyObject *__pyx_v_self, PyObject *__pyx_v_url) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("query_url (wrapper)", 0);
-  __pyx_r = __pyx_pf_7urlPool_9PyUrlPool_12query_url(((struct __pyx_obj_7urlPool_PyUrlPool *)__pyx_v_self), ((PyObject *)__pyx_v_url));
+  __pyx_r = __pyx_pf_7urlPool_9PyUrlPool_14query_url(((struct __pyx_obj_7urlPool_PyUrlPool *)__pyx_v_self), ((PyObject *)__pyx_v_url));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7urlPool_9PyUrlPool_12query_url(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self, PyObject *__pyx_v_url) {
+static PyObject *__pyx_pf_7urlPool_9PyUrlPool_14query_url(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self, PyObject *__pyx_v_url) {
   std::string __pyx_v_c_url;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -2158,14 +2219,14 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_12query_url(struct __pyx_obj_7urlP
   std::string __pyx_t_4;
   __Pyx_RefNannySetupContext("query_url", 0);
 
-  /* "urlPool.pyx":41
+  /* "urlPool.pyx":44
  * 
  *     def query_url(self, url):
  *         cdef string c_url =  str.encode(url)             # <<<<<<<<<<<<<<
  *         return self.url_pool.query_url(c_url)
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)(&PyString_Type)), __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)(&PyString_Type)), __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -2179,14 +2240,14 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_12query_url(struct __pyx_obj_7urlP
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_url) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_url);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __pyx_convert_string_from_py_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_4 = __pyx_convert_string_from_py_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c_url = __pyx_t_4;
 
-  /* "urlPool.pyx":42
+  /* "urlPool.pyx":45
  *     def query_url(self, url):
  *         cdef string c_url =  str.encode(url)
  *         return self.url_pool.query_url(c_url)             # <<<<<<<<<<<<<<
@@ -2194,13 +2255,13 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_12query_url(struct __pyx_obj_7urlP
  *     def query_domain(self, dom):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->url_pool->query_url(__pyx_v_c_url)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->url_pool->query_url(__pyx_v_c_url)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "urlPool.pyx":40
+  /* "urlPool.pyx":43
  *         return bytes.decode(self.url_pool.get_domain(c_url))
  * 
  *     def query_url(self, url):             # <<<<<<<<<<<<<<
@@ -2221,7 +2282,7 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_12query_url(struct __pyx_obj_7urlP
   return __pyx_r;
 }
 
-/* "urlPool.pyx":44
+/* "urlPool.pyx":47
  *         return self.url_pool.query_url(c_url)
  * 
  *     def query_domain(self, dom):             # <<<<<<<<<<<<<<
@@ -2230,19 +2291,19 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_12query_url(struct __pyx_obj_7urlP
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7urlPool_9PyUrlPool_15query_domain(PyObject *__pyx_v_self, PyObject *__pyx_v_dom); /*proto*/
-static PyObject *__pyx_pw_7urlPool_9PyUrlPool_15query_domain(PyObject *__pyx_v_self, PyObject *__pyx_v_dom) {
+static PyObject *__pyx_pw_7urlPool_9PyUrlPool_17query_domain(PyObject *__pyx_v_self, PyObject *__pyx_v_dom); /*proto*/
+static PyObject *__pyx_pw_7urlPool_9PyUrlPool_17query_domain(PyObject *__pyx_v_self, PyObject *__pyx_v_dom) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("query_domain (wrapper)", 0);
-  __pyx_r = __pyx_pf_7urlPool_9PyUrlPool_14query_domain(((struct __pyx_obj_7urlPool_PyUrlPool *)__pyx_v_self), ((PyObject *)__pyx_v_dom));
+  __pyx_r = __pyx_pf_7urlPool_9PyUrlPool_16query_domain(((struct __pyx_obj_7urlPool_PyUrlPool *)__pyx_v_self), ((PyObject *)__pyx_v_dom));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7urlPool_9PyUrlPool_14query_domain(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self, PyObject *__pyx_v_dom) {
+static PyObject *__pyx_pf_7urlPool_9PyUrlPool_16query_domain(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self, PyObject *__pyx_v_dom) {
   std::string __pyx_v_c_dom;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -2252,14 +2313,14 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_14query_domain(struct __pyx_obj_7u
   std::string __pyx_t_4;
   __Pyx_RefNannySetupContext("query_domain", 0);
 
-  /* "urlPool.pyx":45
+  /* "urlPool.pyx":48
  * 
  *     def query_domain(self, dom):
  *         cdef string c_dom = str.encode(dom)             # <<<<<<<<<<<<<<
  *         return self.url_pool.query_domain(c_dom)
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)(&PyString_Type)), __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)(&PyString_Type)), __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -2273,14 +2334,14 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_14query_domain(struct __pyx_obj_7u
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_dom) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dom);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = __pyx_convert_string_from_py_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_4 = __pyx_convert_string_from_py_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c_dom = __pyx_t_4;
 
-  /* "urlPool.pyx":46
+  /* "urlPool.pyx":49
  *     def query_domain(self, dom):
  *         cdef string c_dom = str.encode(dom)
  *         return self.url_pool.query_domain(c_dom)             # <<<<<<<<<<<<<<
@@ -2288,13 +2349,13 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_14query_domain(struct __pyx_obj_7u
  *     def __dealloc__(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->url_pool->query_domain(__pyx_v_c_dom)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->url_pool->query_domain(__pyx_v_c_dom)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "urlPool.pyx":44
+  /* "urlPool.pyx":47
  *         return self.url_pool.query_url(c_url)
  * 
  *     def query_domain(self, dom):             # <<<<<<<<<<<<<<
@@ -2315,7 +2376,7 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_14query_domain(struct __pyx_obj_7u
   return __pyx_r;
 }
 
-/* "urlPool.pyx":48
+/* "urlPool.pyx":51
  *         return self.url_pool.query_domain(c_dom)
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -2323,28 +2384,28 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_14query_domain(struct __pyx_obj_7u
  */
 
 /* Python wrapper */
-static void __pyx_pw_7urlPool_9PyUrlPool_17__dealloc__(PyObject *__pyx_v_self); /*proto*/
-static void __pyx_pw_7urlPool_9PyUrlPool_17__dealloc__(PyObject *__pyx_v_self) {
+static void __pyx_pw_7urlPool_9PyUrlPool_19__dealloc__(PyObject *__pyx_v_self); /*proto*/
+static void __pyx_pw_7urlPool_9PyUrlPool_19__dealloc__(PyObject *__pyx_v_self) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__ (wrapper)", 0);
-  __pyx_pf_7urlPool_9PyUrlPool_16__dealloc__(((struct __pyx_obj_7urlPool_PyUrlPool *)__pyx_v_self));
+  __pyx_pf_7urlPool_9PyUrlPool_18__dealloc__(((struct __pyx_obj_7urlPool_PyUrlPool *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
 }
 
-static void __pyx_pf_7urlPool_9PyUrlPool_16__dealloc__(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self) {
+static void __pyx_pf_7urlPool_9PyUrlPool_18__dealloc__(struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "urlPool.pyx":49
+  /* "urlPool.pyx":52
  * 
  *     def __dealloc__(self):
  *         del self.url_pool             # <<<<<<<<<<<<<<
  */
   delete __pyx_v_self->url_pool;
 
-  /* "urlPool.pyx":48
+  /* "urlPool.pyx":51
  *         return self.url_pool.query_domain(c_dom)
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -2362,19 +2423,19 @@ static void __pyx_pf_7urlPool_9PyUrlPool_16__dealloc__(struct __pyx_obj_7urlPool
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7urlPool_9PyUrlPool_19__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyObject *__pyx_pw_7urlPool_9PyUrlPool_19__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_7urlPool_9PyUrlPool_21__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyObject *__pyx_pw_7urlPool_9PyUrlPool_21__reduce_cython__(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__reduce_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_7urlPool_9PyUrlPool_18__reduce_cython__(((struct __pyx_obj_7urlPool_PyUrlPool *)__pyx_v_self));
+  __pyx_r = __pyx_pf_7urlPool_9PyUrlPool_20__reduce_cython__(((struct __pyx_obj_7urlPool_PyUrlPool *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7urlPool_9PyUrlPool_18__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self) {
+static PyObject *__pyx_pf_7urlPool_9PyUrlPool_20__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2416,19 +2477,19 @@ static PyObject *__pyx_pf_7urlPool_9PyUrlPool_18__reduce_cython__(CYTHON_UNUSED 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7urlPool_9PyUrlPool_21__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
-static PyObject *__pyx_pw_7urlPool_9PyUrlPool_21__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pw_7urlPool_9PyUrlPool_23__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state); /*proto*/
+static PyObject *__pyx_pw_7urlPool_9PyUrlPool_23__setstate_cython__(PyObject *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__setstate_cython__ (wrapper)", 0);
-  __pyx_r = __pyx_pf_7urlPool_9PyUrlPool_20__setstate_cython__(((struct __pyx_obj_7urlPool_PyUrlPool *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
+  __pyx_r = __pyx_pf_7urlPool_9PyUrlPool_22__setstate_cython__(((struct __pyx_obj_7urlPool_PyUrlPool *)__pyx_v_self), ((PyObject *)__pyx_v___pyx_state));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7urlPool_9PyUrlPool_20__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_7urlPool_9PyUrlPool_22__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_7urlPool_PyUrlPool *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2783,7 +2844,7 @@ static void __pyx_tp_dealloc_7urlPool_PyUrlPool(PyObject *o) {
     PyObject *etype, *eval, *etb;
     PyErr_Fetch(&etype, &eval, &etb);
     ++Py_REFCNT(o);
-    __pyx_pw_7urlPool_9PyUrlPool_17__dealloc__(o);
+    __pyx_pw_7urlPool_9PyUrlPool_19__dealloc__(o);
     --Py_REFCNT(o);
     PyErr_Restore(etype, eval, etb);
   }
@@ -2792,13 +2853,14 @@ static void __pyx_tp_dealloc_7urlPool_PyUrlPool(PyObject *o) {
 
 static PyMethodDef __pyx_methods_7urlPool_PyUrlPool[] = {
   {"add", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_7urlPool_9PyUrlPool_3add, METH_VARARGS|METH_KEYWORDS, 0},
-  {"get", (PyCFunction)__pyx_pw_7urlPool_9PyUrlPool_7get, METH_NOARGS, 0},
-  {"get_batch", (PyCFunction)__pyx_pw_7urlPool_9PyUrlPool_9get_batch, METH_O, 0},
-  {"get_domain", (PyCFunction)__pyx_pw_7urlPool_9PyUrlPool_11get_domain, METH_O, 0},
-  {"query_url", (PyCFunction)__pyx_pw_7urlPool_9PyUrlPool_13query_url, METH_O, 0},
-  {"query_domain", (PyCFunction)__pyx_pw_7urlPool_9PyUrlPool_15query_domain, METH_O, 0},
-  {"__reduce_cython__", (PyCFunction)__pyx_pw_7urlPool_9PyUrlPool_19__reduce_cython__, METH_NOARGS, 0},
-  {"__setstate_cython__", (PyCFunction)__pyx_pw_7urlPool_9PyUrlPool_21__setstate_cython__, METH_O, 0},
+  {"pq_size", (PyCFunction)__pyx_pw_7urlPool_9PyUrlPool_7pq_size, METH_NOARGS, 0},
+  {"get", (PyCFunction)__pyx_pw_7urlPool_9PyUrlPool_9get, METH_NOARGS, 0},
+  {"get_batch", (PyCFunction)__pyx_pw_7urlPool_9PyUrlPool_11get_batch, METH_O, 0},
+  {"get_domain", (PyCFunction)__pyx_pw_7urlPool_9PyUrlPool_13get_domain, METH_O, 0},
+  {"query_url", (PyCFunction)__pyx_pw_7urlPool_9PyUrlPool_15query_url, METH_O, 0},
+  {"query_domain", (PyCFunction)__pyx_pw_7urlPool_9PyUrlPool_17query_domain, METH_O, 0},
+  {"__reduce_cython__", (PyCFunction)__pyx_pw_7urlPool_9PyUrlPool_21__reduce_cython__, METH_NOARGS, 0},
+  {"__setstate_cython__", (PyCFunction)__pyx_pw_7urlPool_9PyUrlPool_23__setstate_cython__, METH_O, 0},
   {0, 0, 0, 0}
 };
 
@@ -2964,7 +3026,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 29, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 32, __pyx_L1_error)
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(1, 2, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;

@@ -8,7 +8,7 @@ from urllib.parse import urlencode, urljoin
 import aiohttp
 
 from item import PageItem, ResponseItem
-from utils.function import Function
+from utils.function import get_domain
 # TODO: Drop Item
 
 
@@ -75,7 +75,7 @@ class PipelineMainContent(PipelineBase):
         parser = HtmlParser(resp.html)
 
         item.title = parser.get_title()
-        item.domain = Function.get_domain(item.url)
+        item.domain = get_domain(item.url)
         item.body = parser.get_main_content()
         item.a = []
         for href in parser.get_hrefs():

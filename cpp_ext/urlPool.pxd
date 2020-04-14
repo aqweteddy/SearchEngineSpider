@@ -8,4 +8,5 @@ cdef extern from "urlPool.h":
         int query_url(string)
         int query_domain(string)
         int size()
+        int pq_size()
         string get_domain(string)

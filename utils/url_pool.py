@@ -1,4 +1,4 @@
-from utils.function import Function
+from utils.function import get_domain
 
 
 class UrlItem:
@@ -37,7 +37,7 @@ class UrlPool:
         if depth > self.max_depth:
             return
 
-        domain = Function.get_domain(url)
+        domain = get_domain(url)
         try:
             self.url_db[domain].add(UrlItem(url, depth))
             self.cnt_url += 1

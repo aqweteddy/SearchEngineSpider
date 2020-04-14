@@ -1,5 +1,13 @@
 # SearchEngineSpider
 
+## 流程
+
+1. 發出 Request
+2. pipelines
+  1. parser(get main content)
+  2. to db
+3. put new urls into url pool
+
 ## Architecture
 
 * engine: main spider
@@ -27,5 +35,9 @@
 #### Html5-Parser
 
 * C gumbo backend with lxml
-
 * 10 thread: 2250 request: 1:03.99
+
+### Full
+
+* with Cpp Url Queue: 2:43.79 7115 requests
+* with Python Url Queue: 6:55.70 23746

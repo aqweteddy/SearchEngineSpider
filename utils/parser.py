@@ -60,6 +60,7 @@ class HtmlParser:
         for t in self.text:
             if len(t) > len(result):
                 result = t
+        
         return result[:200]
 
 
