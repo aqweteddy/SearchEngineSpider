@@ -8,8 +8,8 @@ import aiohttp
 
 from item import PageItem, ResponseItem
 from pipelines import PipelineToDB, PipelineMainContent
-# from utils.url_pool import UrlPool
-from cpp_ext.urlPool import PyUrlPool
+from utils.url_pool import UrlPool
+# from cpp_ext.urlPool import PyUrlPool
 
 
 class Spider:
@@ -23,8 +23,8 @@ class Spider:
         self.pipelines = pipelines
         self.logger = logging.getLogger('[Spider]')
 
-        self.url_que = PyUrlPool(max_depth)
-        # self.url_que = UrlPool(max_depth)
+        # self.url_que = PyUrlPool(max_depth)
+        self.url_que = UrlPool(max_depth)
         self.max_thread = max_thread
         self.max_concurrent_request = max_concurrent_request
 
@@ -53,16 +53,15 @@ class Spider:
     def request_handler(self):
         loop = asyncio.get_event_loop()
 
+        # while self.url_que.pq_size() != 0:
         while len(self.url_que) != 0:
-            self.logger.debug(f'[time: {(time.time() - self.start_time) / 60.0}] url_pool_size: {len(self.url_que)}')
             results = loop.run_until_complete(self.fetch_all())
-
             with concurrent.futures.ProcessPoolExecutor(self.max_thread) as executor:
                 futures = []
                 for resp_item in results:
                     futures.append(executor.submit(
                         Spider.pipelines_handler, resp_item, self.pipelines))
-
+                # print( f"[pipe time: {(time.time() - self.start_time):.2f} sec]")
                 for future in concurrent.futures.as_completed(futures):
                     try:
                         page = future.result()
@@ -71,16 +70,19 @@ class Spider:
                         for href in page.a:
                             if self.allow_url(href):
                                 self.url_que.add(href, page.depth_from_root+1)
-
                         for pipe in self.pipelines:
                             pipe.save(page)
-                    except Exception:
-                        pass
+                    except Exception as e:
+                        self.logger.warning(f'[Pipelines]: {e}')
+
 
     async def fetch_all(self):
-        self.logger.debug(f'url_pool_size: {len(self.url_que)}')
+        # self.logger.debug(f'url_pool_size: {len(self.url_que)}')
+        self.logger.info(f'[time: {time.time() - self.start_time:.2f} sec] queue_size: {len(self.url_que)} crawled_request: {self.cnt_request}')
+
         tasks = []
-        async with aiohttp.ClientSession() as session:
+        timeout = aiohttp.ClientTimeout(total=10)
+        async with aiohttp.ClientSession(timeout=timeout) as session:
             urls = self.url_que.get_batch(self.max_concurrent_request)
             self.cnt_request += len(urls)
 
@@ -92,14 +94,18 @@ class Spider:
         return results
 
     def allow_url(self, href: str):
-        if not allow_domain:
+        if not self.allow_domain:
             return True
-
+        fl = False
         for domain in self.allow_domain:
             if domain in href:
-                return True
+                fl = True
+                break
+        for file_type in ['.mpg', '.wmv', '.mov', '.jpg', '.avi', '.MPG', '.rmvb']:
+            if file_type in domain:
+                fl = False
         
-        return False
+        return fl
 
     @staticmethod
     def pipelines_handler(resp_item, pipelines):
@@ -127,7 +133,7 @@ class Spider:
 
         Arguments:
             url {str} -- a url
-｛
+
         Returns:
             item.ResponseItem()
         """
@@ -142,17 +148,16 @@ class Spider:
                 item.resp_code = resp.status
         except Exception as e:
             item.drop = True
-            self.logger.warning(f"url: {url} [{e}]")
+            self.logger.warning(f"url: {url} Error:{e}")
 
         return item
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.WARNING)
+    logging.basicConfig(level=logging.INFO)
 
     spider = Spider(pipelines=[PipelineToDB(), PipelineMainContent()], 
                     allow_domain=None,
-                    max_depth=10, 
+                    max_depth=5, 
                     max_thread=10)
-    spider.start_batch(
-        ['https://www.ccu.edu.tw/'])
+    spider.start_batch(['https://www.dcard.tw/'])

@@ -72,10 +72,8 @@ class UrlPool:
 
 if __name__ == '__main__':
     pool = UrlPool()
-    pool.add('https://www.google.com/search?q=python+hash&oq=python+hash&aqs=chrome..69i57j0l7.5399j0j7&sourceid=chrome&ie=UTF-8')
-    pool.add('https://minsyong.cyhg.gov.tw/News_Content.aspx?n=627D21CC0A6A8360&sms=D53925F50550A904&s=F53B23406516E4B6')
-    pool.add('https://minsyong.cyhg.gov.tw/News_Content.aspx?n=627D21CC0A6A8360&sms=D53925F50550A904&s=F53B23406516E4B6')
-    pool.add('https://www.google.com', 2)
+    for i in range(100000):
+        pool.add(f'https://www.google.com{i}', 2)
 
-    print(pool.get_batch(4))
+    print(len(pool.get_batch(99999)))
     print(len(pool))

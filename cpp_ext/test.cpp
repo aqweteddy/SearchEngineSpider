@@ -5,10 +5,11 @@ using namespace std;
 
 UrlPool run_add(int k, int pq_max_size)
 {
-    UrlPool pool(1000, 2000, 997, 2000, 4000, 1237, 2);
+    UrlPool pool(10, 2000, 1237, 1023);
     for (int i = 0; i < k; ++i) {
         pool.add("https://github.com/cyton/cython/wik" + to_string(i), 1);
     }
+    cout << pool.size() << " " << pool.pq_size() << endl;
     return pool;
 }
 
@@ -34,5 +35,5 @@ int main()
     // for(int i=40000; i< 100001; i+=10000) {
     //     run(1000000, i);
     // }
-    run(100000, 70000);
+    run(10000, 70000);
 }

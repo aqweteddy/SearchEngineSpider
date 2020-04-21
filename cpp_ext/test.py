@@ -1,13 +1,13 @@
 from urlPool import PyUrlPool
-
-pool = PyUrlPool(100, 200, 3, 200, 300, 19, 10)
-pool.add("https://zhuanlan.zhihu.com/p/74219095", 2)
-pool.add("https://zhuanlan.zhihu.com/p/7421995", 2)
-pool.add("https://zhuanlan.zhihu.com/p/7219095", 2)
-pool.add("https://github.com/cython/cython/wik", 2)
-pool.add("https://github.com/cyton/cython/wik", 2)
-
-print(pool.get_batch(100))
-domain = pool.get_domain('https://github.com')
-print(pool.query_domain(domain))
+import random
+T = 1000000
+pool = PyUrlPool(5, 1000, 2000, 997)
 print(len(pool))
+
+for i in range(T):
+    # print(T)
+    pool.add(f"https://zhuanlan.zhihu.com/p/74219095{i}", 2)
+print(len(pool.get_batch(T-10)))
+print(len(pool))
+print(pool.pq_size())
+# print(len(pool.get_batch(T)))

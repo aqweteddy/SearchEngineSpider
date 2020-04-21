@@ -1,4 +1,5 @@
 #include "cms.h"
+#include "bloom_filter.h"
 #include <queue>
 #include <string>
 #include <vector>
@@ -28,12 +29,17 @@ struct Comparator {
 
 class UrlPool {
 public:
-    UrlPool(int max_depth, int url_r, int url_c, int url_p, int dom_r, int dom_c, int dom_p)
-        : max_depth(max_depth)
-        , url_pool(url_r, url_c, url_p)
-        , domain_pool(dom_r, dom_c, dom_p)
+    UrlPool(int max_depth, int dom_r, int dom_c, int dom_p)
+        : max_depth(max_depth),
+          domain_pool(dom_r, dom_c, dom_p)
     {
         pq_max_size = 70000;
+        cnt_url = 0;
+        parameters.projected_element_count = 100000000;
+   // Maximum tolerable false positive probability? (0,1)
+        parameters.false_positive_probability = 0.0001; // 1 in 10000
+        parameters.compute_optimal_parameters();
+        url_pool = bloom_filter(parameters);
     };
 
     int add(const std::string& url, int depth)
@@ -81,11 +87,12 @@ public:
             (*url) = "";
             (*depth) = 0;
         }
+        --cnt_url;
     }
 
     int query_url(const std::string& url)
     {
-        return url_pool.query(url) > 0;
+        return url_pool.contains(url);
     }
 
     int query_domain(const std::string& url)
@@ -119,7 +126,9 @@ public:
 
 private:
     int max_depth, cnt_url, pq_max_size;
-    CmsHash<string> domain_pool, url_pool;
+    CmsHash<string> domain_pool;
+    bloom_parameters parameters;
+    bloom_filter url_pool;
     std::priority_queue<Url, vector<Url>, Comparator> pq;
     std::queue<psi> backup;
 };

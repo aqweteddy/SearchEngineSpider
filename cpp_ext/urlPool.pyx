@@ -5,8 +5,8 @@ from urlPool cimport UrlPool
 cdef class PyUrlPool:
     cdef UrlPool* url_pool
 
-    def __cinit__(self, int max_depth, int url_r=1000, int url_c=1000, int url_p=1023, int dom_r=1000, int dom_c=1000, int dom_p=1023):
-        self.url_pool = new UrlPool(max_depth, url_r, url_c, url_p, dom_r, url_c, url_p)
+    def __cinit__(self, int max_depth,int dom_r=1000, int dom_c=1000, int dom_p=1023):
+        self.url_pool = new UrlPool(max_depth, dom_r, dom_c, dom_p)
     
     # def __cinit__(self, int max_depth):
     #     self.url_pool = new UrlPool(max_depth, 1000, 1000, 19, 1000, 1000, 1023)
@@ -16,7 +16,10 @@ cdef class PyUrlPool:
         return self.url_pool.add(c_url, depth)
  
     def __len__(self):
-        return self.url_pool.size()
+        try:
+            return self.url_pool.size()
+        except Exception:
+            return 0
 
     def pq_size(self):
         return self.url_pool.pq_size()
@@ -31,7 +34,7 @@ cdef class PyUrlPool:
         result = []
         for i in range(k):
             tmp = self.get()
-            if not tmp[0]:
+            if tmp[0] == '':
                 break
             result.append(tmp)
         return result
